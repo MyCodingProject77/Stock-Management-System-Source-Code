@@ -1,0 +1,136 @@
+
+
+
+                  Save Code
+
+
+                  SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=StockDB;Integrated Security=True");
+            con.Open();
+            SqlCommand cnn = new SqlCommand("insert into productab values(@productid,@productname,@price,@quantity)", con);
+            cnn.Parameters.AddWithValue("@ProductId", int.Parse(textBox1.Text));
+            cnn.Parameters.AddWithValue("@ProductName", textBox2.Text);
+            cnn.Parameters.AddWithValue("@Price", textBox3.Text);
+            cnn.Parameters.AddWithValue("@Quantity", textBox4.Text);
+            cnn.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Record Saved Successfully");
+
+
+
+
+                Add Code
+
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=StockDB;Integrated Security=True");
+            con.Open();
+            SqlCommand cnn = new SqlCommand("select * from productab", con);
+            SqlDataAdapter da = new SqlDataAdapter(cnn);
+            DataTable table = new DataTable();
+            da.Fill(table);
+            dataGridView1.DataSource = table;
+
+
+
+               Delete Code
+
+
+               SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=StockDB;Integrated Security=True");
+            con.Open();
+            SqlCommand cnn = new SqlCommand("delete productab where productid=@productid", con);
+            cnn.Parameters.AddWithValue("@ProductId", int.Parse(textBox1.Text));
+            
+            cnn.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Record Deleted Successfully");
+
+
+
+
+            Product Load Code
+
+
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=StockDB;Integrated Security=True");
+            con.Open();
+            SqlCommand cnn = new SqlCommand("select * from productab", con);
+            SqlDataAdapter da = new SqlDataAdapter(cnn);
+            DataTable table = new DataTable();
+            da.Fill(table);
+            dataGridView1.DataSource = table;
+
+
+
+
+            Dashboard Load Code
+
+             display();
+            display1();
+            display2();
+            display3();
+
+
+           private void display()
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=StockDB;Integrated Security=True");
+            con.Open();
+            SqlCommand comm = new SqlCommand("SELECT COUNT(*) FROM productab", con);
+            Int32 count = Convert.ToInt32(comm.ExecuteScalar());
+            if (count > 0)
+            {
+                lblCount.Text = Convert.ToString(count.ToString());
+            }
+            else
+            {
+                lblCount.Text = "0";
+            }
+            con.Close();
+        }
+
+        private void display1()
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=StockDB;Integrated Security=True");
+            con.Open();
+            SqlCommand comm = new SqlCommand("SELECT COUNT(*) FROM suptab", con);
+            Int32 count = Convert.ToInt32(comm.ExecuteScalar());
+            if (count > 0)
+            {
+                lbl1Count.Text = Convert.ToString(count.ToString());
+            }
+            else
+            {
+                lbl1Count.Text = "0";
+            }
+            con.Close();
+        }
+
+        private void display2()
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=StockDB;Integrated Security=True");
+            con.Open();
+            SqlCommand comm = new SqlCommand("SELECT COUNT(*) FROM ptab", con);
+            Int32 count = Convert.ToInt32(comm.ExecuteScalar());
+            if (count > 0)
+            {
+                lbl2Count.Text = Convert.ToString(count.ToString());
+            }
+            else
+            {
+                lbl2Count.Text = "0";
+            }
+            con.Close();
+        }
+
+        private void display3()
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=StockDB;Integrated Security=True");
+            con.Open();
+            SqlCommand comm = new SqlCommand("SELECT COUNT(*) FROM stab", con);
+            Int32 count = Convert.ToInt32(comm.ExecuteScalar());
+            if (count > 0)
+            {
+                lbl3Count.Text = Convert.ToString(count.ToString());
+            }
+            else
+            {
+                lbl3Count.Text = "0";
+            }
+            con.Close();
+        }
